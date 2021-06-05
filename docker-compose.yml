@@ -1,0 +1,12 @@
+version: '3'
+services:
+  www:
+    build: .
+    env_file:
+      - .environment/conf.env
+      - .environment/dev.env
+      # - .environment/prod.env
+    ports:
+      - "5432:5432"
+    command:
+      sh /start.sh
