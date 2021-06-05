@@ -9,8 +9,4 @@ COPY --chown=postgres:postgres srcs/pg_hba.conf .
 COPY --chown=postgres:postgres srcs/postgresql.conf .
 RUN service postgresql start && createuser admin && createdb transcendence -O admin
 
-#RUN mkdir /run/postgresql && chown postgres:postgres /run/postgresql/
-#USER postgres
-#WORKDIR /var/lib/postgresql/
-#RUN mkdir data && chmod 0700 data && initdb -D data
 COPY srcs/start.sh /
