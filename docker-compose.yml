@@ -4,9 +4,8 @@ services:
     user: "root:root"
     build: .
     env_file:
-      - .environment/conf.env
-      - .environment/dev.env
-      # - .environment/prod.env
+      - .environment/default.env
+      - .environment/production.env
     volumes:
       - ./data:/var/lib/postgresql/11/main
       - ./www:/www
@@ -14,4 +13,4 @@ services:
       - "5432:5432"
       - "80:3000"
     command:
-      sh /start.sh
+      bash /start.sh
