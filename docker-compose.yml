@@ -7,10 +7,10 @@ services:
       - .environment/default.env
       - .environment/production.env
     volumes:
-      - ./data:/var/lib/postgresql/11/main
       - ./www:/www
+      - ./data:/var/lib/postgresql/11/main
     ports:
-      - "5432:5432"
       - "80:3000"
+      - "5432:5432"
     command:
       bash /start.sh
