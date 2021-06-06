@@ -5,5 +5,6 @@ pg_serial pg_snapshots pg_stat pg_stat_tmp pg_tblspc pg_twophase pg_wal/archive_
 chown -R postgres:postgres /var/lib/postgresql/11/main
 chmod -R 700 /var/lib/postgresql/11/main
 service postgresql start
-psql -U postgres -c "ALTER USER admin WITH password '${ADMIN_PASSWORD}'"
-tail -f /var/log/postgresql/postgresql-11-main.log
+psql -c "ALTER USER admin WITH password '${ADMIN_PASSWORD}'"
+bundle install
+rails s -b "0.0.0.0"
