@@ -10,7 +10,7 @@ psql -U postgres -c "ALTER USER admin WITH password '${ADMIN_PASSWORD}'"
 #tail -f /dev/null
 cd /www
 bundle install
-rm -f /www/tmp/pids/server.pid
 rails db:migrate
 if [ "$RAILS_ENV" == "production" ]; then rails assets:precompile; fi
+rm -f /www/tmp/pids/server.pid
 rails s -b "0.0.0.0"
