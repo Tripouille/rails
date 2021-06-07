@@ -4,10 +4,26 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import Backbone from 'backbone'
+
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
+
+Backbone._sync = Backbone.sync;
+Backbone.sync = function(method, model, options) {
+  if (!options.noCSRF) {
+    var beforeSend = options.beforeSend;
+
+    options.beforeSend = function(xhr) {
+      var token = $('meta[name="csrf-token"]').attr('content');
+      if (token) {xhr.setRequestHeader('X-CSRF-Token', token);}
+      if (beforeSend) {return beforeSend.apply(this, arguments);}
+    };
+  }
+  return Backbone._sync(method, model, options);
+};
+
+require('router');

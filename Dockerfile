@@ -21,5 +21,6 @@ COPY --chown=postgres:postgres srcs/pg_hba.conf .
 COPY --chown=postgres:postgres srcs/postgresql.conf .
 RUN service postgresql start && createuser root && createuser admin && createdb transcendence -O admin
 
+
 WORKDIR /www
 COPY srcs/start.sh /

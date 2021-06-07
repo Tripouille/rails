@@ -6,8 +6,11 @@ chown -R postgres:postgres /var/lib/postgresql/11/main
 chmod -R 700 /var/lib/postgresql/11/main
 service postgresql start
 psql -U postgres -c "ALTER USER admin WITH password '${ADMIN_PASSWORD}'"
+
+#tail -f /dev/null
 cd /www
 bundle install
 rm -f /www/tmp/pids/server.pid
+rails db:migrate
 if [ "$RAILS_ENV" == "production" ]; then rails assets:precompile; fi
 rails s -b "0.0.0.0"
