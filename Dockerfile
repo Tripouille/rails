@@ -21,5 +21,9 @@ COPY --chown=postgres:postgres srcs/pg_hba.conf .
 COPY --chown=postgres:postgres srcs/postgresql.conf .
 RUN service postgresql start && createuser root && createuser admin && createdb transcendence -O admin
 
+#[Redis]
+USER root
+RUN aptitude install -y redis
+#RUN mkdir -p /sys/kernel/mm/transparent_hugepage && echo never > /sys/kernel/mm/transparent_hugepage/enabled
 WORKDIR /www
 COPY srcs/start.sh /
