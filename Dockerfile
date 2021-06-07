@@ -26,4 +26,6 @@ USER root
 RUN aptitude install -y redis
 #RUN mkdir -p /sys/kernel/mm/transparent_hugepage && echo never > /sys/kernel/mm/transparent_hugepage/enabled
 WORKDIR /www
+COPY www/Gemfile .
+RUN bundle install --jobs 42 --no-prune
 COPY srcs/start.sh /
